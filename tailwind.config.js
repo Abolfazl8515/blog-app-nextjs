@@ -43,6 +43,7 @@ module.exports = {
         success: withOpacity("--color-success"),
         warning: withOpacity("--color-warning"),
         error: withOpacity("--color-error"),
+        app: withOpacity("--background-app-rgb"),
       },
       fontFamily: {
         sans: ["var(--font-vazir)", ...fontFamily.sans],

@@ -27,7 +27,7 @@ function Header() {
 
       `}
     >
-      <nav className="container xl:max-w-screen-xl">
+      <nav className="container xl:max-w-screen-lg">
         <ul className="flex items-center text-secondary-400 justify-between py-2">
           <div className="flex items-center gap-x-10">
             {navLinks.map((navLink) => {

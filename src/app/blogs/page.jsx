@@ -7,10 +7,9 @@ export const metadata = {
 };
 
 async function BlogsPage() {
-
   return (
     <div>
-      <h3>لیست بلاگ ها</h3>
+      <h3 className="text-xl mb-6">لیست تمام بلاگ ها</h3>
       <Suspense fallback={<Spinner />}>
         <PostList />
       </Suspense>

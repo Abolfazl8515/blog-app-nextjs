@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import CategoryList from "./_components/CategoryList";
 import Spinner from "@/ui/Loading";
+import CategoryList from "../_components/CategoryList";
 
 function Layout({ children }) {
   return (

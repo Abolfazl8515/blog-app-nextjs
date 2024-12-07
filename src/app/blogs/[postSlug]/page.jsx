@@ -2,8 +2,18 @@ import { getSingleBlog } from "@/services/blogsService";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({ params }) {
+  const { postSlug } = await params;
+  const { post } = await getSingleBlog(postSlug);
+  return {
+    title: post.title,
+    description: post.briefText,
+  };
+}
+
 async function SinglePost({ params }) {
-  const { post } = await getSingleBlog(params.postSlug);
+  const { postSlug } = await params;
+  const { post } = await getSingleBlog(postSlug);
   if (!post) notFound();
 
   return (
@@ -18,6 +28,7 @@ async function SinglePost({ params }) {
           fill
           src={post.coverImageUrl}
           alt={post.title}
+          priority
         />
       </div>
       <p className="mb-8">{post.text}</p>

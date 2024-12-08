@@ -1,6 +1,14 @@
-import { getSingleBlog } from "@/services/blogsService";
+import { getBlogs, getSingleBlog } from "@/services/blogsService";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const { posts } = await getBlogs();
+  const slugs = posts.map((post) => ({ postSlug: post.slug }));
+  return slugs;
+}
 
 export async function generateMetadata({ params }) {
   const { postSlug } = await params;

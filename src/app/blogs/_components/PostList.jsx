@@ -10,7 +10,7 @@ async function PostList() {
   return (
     <div className="grid grid-cols-12 gap-4">
       {posts.map((post) => (
-        <div className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 rounded-lg p-2 cursor-pointer">
+        <div key={post._id} className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 rounded-lg p-2 cursor-pointer">
           <Link href={`/blogs/${post.slug}`}>
             <CoverImage {...post} />
             <div>

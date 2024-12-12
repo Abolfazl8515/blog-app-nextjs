@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-function NavLink({ path, children }) {
+function NavLink({ path, children, active = "text-primary-900" }) {
   const pathname = usePathname();
 
   return (
     <Link
-      className={`block py-2 hover:text-secondary-900 transition-all ease-out
-        ${pathname === path ? "text-primary-900" : ""}
+      className={`block p-2 transition-all ease-out
+        ${pathname === path && active}
       `}
       href={path}
     >

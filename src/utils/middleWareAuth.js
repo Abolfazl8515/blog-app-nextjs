@@ -1,14 +1,7 @@
-export default async function middleWareAuth(req) {
-  const accessToken = req.cookies.get("accessToken");
-  const refreshToken = req.cookies.get("refreshToken");
+import setCookieOnReq from "./setCookieOnReq";
 
-  const options = {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Cookie: `${accessToken?.name}=${accessToken?.value}; ${refreshToken?.name}=${refreshToken?.value}`,
-    },
-  };
+export default async function middleWareAuth(req) {
+  const options = setCookieOnReq(req.cookies);
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/user/profile`,

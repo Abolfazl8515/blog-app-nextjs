@@ -17,21 +17,26 @@ axiosConfig.interceptors.response.use(
     if (err.response.status === 401 && !originalConfig._retry) {
       try {
         originalConfig._retry = true;
-        const { data } = await axios.get(`${BASE_URL}/user/refresh-token`, {
-          withCredentials: true,
-        });
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/refresh-token`,
+          {
+            withCredentials: true,
+          }
+        );
         if (data) return axiosConfig(originalConfig);
       } catch (err) {
         return Promise.reject(err);
       }
-      return Promise.reject(err);
     }
+    return Promise.reject(err);
   }
 );
 
-export const http = {
+const http = {
   get: axiosConfig.get,
   post: axiosConfig.post,
   put: axiosConfig.put,
   delete: axiosConfig.delete,
 };
+
+export default http;

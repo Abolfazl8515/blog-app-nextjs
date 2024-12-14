@@ -89,7 +89,7 @@ export default function AuthProvider({ children }) {
     } catch (error) {
       const errorMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errorMsg });
-      toast.error(error?.response?.data?.message);
+      toast.error(errorMsg);
     }
   };
   const getUser = async () => {
@@ -100,7 +100,7 @@ export default function AuthProvider({ children }) {
     } catch (error) {
       const errorMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errorMsg });
-      toast.error(error?.response?.data?.message || "لطفا وارد حساب کاربری خود شوید");
+      toast.error(errorMsg);
     }
   };
   const logout = () => {};

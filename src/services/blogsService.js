@@ -1,7 +1,9 @@
 import http from "./httpService";
 
-export const getBlogs = (options) => {
-  return http.get("/post/list", options).then(({ data }) => data.data);
+export const getBlogs = (options, queries) => {
+  return http
+    .get(`/post/list?${queries}`, options)
+    .then(({ data }) => data.data);
 };
 
 export const getSingleBlog = (slug) => {

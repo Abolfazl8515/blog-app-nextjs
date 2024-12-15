@@ -1,16 +1,10 @@
-import { getBlogs } from "@/services/blogsService";
 import Link from "next/link";
 import CoverImage from "./CoverImage";
 import Author from "./Author";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import PostInteraction from "./PostInteraction";
-import { cookies } from "next/headers";
-import setCookieOnReq from "@/utils/setCookieOnReq";
 
-async function PostList() {
-  const cookieStore = cookies();
-  const options = setCookieOnReq(cookieStore);
-  const { posts } = await getBlogs(options);
+async function PostList({posts}) {
   return (
     <div className="grid grid-cols-12 gap-4">
       {posts.map((post) => (

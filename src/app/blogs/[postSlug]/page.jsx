@@ -1,6 +1,7 @@
 import { getBlogs, getSingleBlog } from "@/services/blogsService";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import RelatedPost from "../_components/RelatedPost";
 
 export const dynamicParams = false;
 
@@ -40,8 +41,8 @@ async function SinglePost({ params }) {
         />
       </div>
       <p className="mb-8">{post.text}</p>
-      {/* {post.related.length > 0 && <RelatedPost posts={post.related} />}
-      <PostComment post={post} /> */}
+      {post.related.length > 0 && <RelatedPost posts={post.related} />}
+      {/* <PostComment post={post} /> */}
     </div>
   );
 }

@@ -36,6 +36,7 @@ async function SinglePost({ params }) {
         <Image
           className="object-cover object-center"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           src={post.coverImageUrl}
           alt={post.title}
           priority

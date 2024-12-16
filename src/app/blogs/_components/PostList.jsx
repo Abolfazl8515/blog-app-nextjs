@@ -4,7 +4,7 @@ import Author from "./Author";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import PostInteraction from "./PostInteraction";
 
-async function PostList({posts}) {
+async function PostList({ posts }) {
   return (
     <div className="grid grid-cols-12 gap-4">
       {posts.map((post) => (
@@ -13,7 +13,7 @@ async function PostList({posts}) {
           className="col-span-12 sm:col-span-6 lg:col-span-4 border border-secondary-300 rounded-lg p-2 cursor-pointer"
         >
           <Link href={`/blogs/${post.slug}`}>
-            <CoverImage {...post} />
+            <CoverImage {...post} priority={true} />
           </Link>
           <div>
             <Link href={`/blogs/${post.slug}`}>

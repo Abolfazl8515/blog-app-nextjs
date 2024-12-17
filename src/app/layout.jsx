@@ -1,5 +1,4 @@
 import AuthProvider from "@/context/AuthProvider";
-import Header from "@/components/Header";
 import vazirFont from "@/constants/localfont";
 import "@/styles/globals.css";
 import { Toaster } from "react-hot-toast";

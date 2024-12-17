@@ -16,11 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body className={`${vazirFont.variable} font-sans min-h-screen`}>
-        <AuthProvider>
-          <Toaster />
-          <Header />
-          {children}
-        </AuthProvider>
+        <Toaster />
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

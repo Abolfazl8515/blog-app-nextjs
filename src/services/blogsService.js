@@ -13,11 +13,22 @@ export const getSingleBlog = async (slug) => {
     .catch((err) => err);
 };
 
+export const getSingleBlogById = async (id) => {
+  return http
+    .get(`/post/${id}`)
+    .then(({ data }) => data.data)
+    .catch((err) => err);
+};
+
+export const editBlogApi = async ({ id, data }) => {
+  return http.patch(`/post/update/${id}`, data).then(({ data }) => data.data);
+};
+
 export const likePostApi = async (id) => {
   return http.post(`/post/like/${id}`).then(({ data }) => data.data);
 };
 
-export const bookmarkPostApi =  async (id) => {
+export const bookmarkPostApi = async (id) => {
   return http.post(`/post/bookmark/${id}`).then(({ data }) => data.data);
 };
 

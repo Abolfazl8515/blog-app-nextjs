@@ -5,6 +5,8 @@ function TextArea({
   dir = "rtl",
   onChange,
   isRequired = false,
+  validationSchema = {},
+  register,
 }) {
   return (
     <div className="textField">
@@ -21,6 +23,7 @@ function TextArea({
         }`}
         value={value}
         onChange={onChange}
+        {...register(name, validationSchema)}
       ></textarea>
     </div>
   );

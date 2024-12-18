@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const sidebarNav = [
   {
@@ -45,7 +45,7 @@ const sidebarNav = [
 ];
 
 function SideBarNav() {
-  const router = useRouter();
+  const pathname = usePathname();
   return (
     <ul className="space-y-2">
       {sidebarNav.map((nav) => {
@@ -57,7 +57,7 @@ function SideBarNav() {
                 "flex items-center gap-x-2 rounded-2xl font-medium hover:text-primary-900 transition-all duration-200 text-secondary-700 py-3 px-4",
                 {
                   "bg-primary-100/40 !font-bold text-primary-900":
-                    router.pathname === nav.href,
+                    pathname === nav.href,
                 }
               )}
             >

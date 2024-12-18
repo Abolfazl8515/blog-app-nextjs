@@ -36,6 +36,7 @@ const http = {
   get: axiosConfig.get,
   post: axiosConfig.post,
   put: axiosConfig.put,
+  patch: axiosConfig.patch,
   delete: axiosConfig.delete,
 };
 

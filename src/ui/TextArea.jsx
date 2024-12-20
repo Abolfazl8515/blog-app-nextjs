@@ -6,7 +6,7 @@ function TextArea({
   onChange,
   isRequired = false,
   validationSchema = {},
-  register,
+  register = () => {},
 }) {
   return (
     <div className="textField">

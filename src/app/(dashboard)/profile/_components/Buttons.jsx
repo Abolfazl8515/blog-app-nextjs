@@ -37,11 +37,7 @@ export function DeleteButton({ id: postId, postTitle }) {
   useEffect(() => {
     if (state?.message) {
       toast.success(state.message);
-      if (pathname === "/profile") {
-        router.push("/profile", { scroll: false });
-      } else if (pathname === "/profile/posts") {
-        router.push("/profile/posts", { scroll: false });
-      }
+      router.refresh();
       setOpen(false);
     } else if (state?.error) {
       toast.error(state.error);

@@ -24,6 +24,10 @@ export const editBlogApi = async ({ id, data }) => {
   return http.patch(`/post/update/${id}`, data).then(({ data }) => data.data);
 };
 
+export const createBlogApi = async (data) => {
+  return http.post("/post/create", data).then(({ data }) => data.data);
+};
+
 export const DeleteBlogApi = async (id, options) => {
   return http
     .delete(`/post/remove/${id}`, options)

@@ -1,5 +1,4 @@
 "use client";
-import { getCategories } from "@/services/categoryService";
 import Button from "@/ui/Button";
 import ButtonIcon from "@/ui/ButtonIcon";
 import Select from "@/ui/Select";
@@ -8,22 +7,62 @@ import TextField from "@/ui/TextField";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Loading from "app/blogs/loading";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import useEditPost from "../[postId]/edit/useEditPost";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
+import useCreatePost from "../create/useCreatePost";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { imageUrlToFile } from "@/utils/fileFormatter";
+import { useEffect, useState } from "react";
 
-function CreatePostForm({ postToEdit, categories }) {
-  const isEditSession = Boolean(postToEdit);
+const schema = yup
+  .object({
+    title: yup
+      .string()
+      .min(5, "حداقل ۵ کاراکتر را وارد کنید")
+      .required("عنوان ضروری است"),
+    briefText: yup
+      .string()
+      .min(5, "حداقل ۱۰ کاراکتر را وارد کنید")
+      .required("توضیحات ضروری است"),
+    text: yup
+      .string()
+      .min(5, "حداقل ۱۰ کاراکتر را وارد کنید")
+      .required("توضیحات ضروری است"),
+    slug: yup.string().required("اسلاگ ضروری است"),
+    readingTime: yup
+      .number()
+      .positive()
+      .integer()
+      .required("زمان مطالعه ضروری است")
+      .typeError("یک عدد را وارد کنید"),
+    category: yup.string().required("دسته بندی ضروری است"),
+  })
+  .required();
+
+function CreatePostForm({ postToEdit = {}, categories }) {
+  const isEditSession = Boolean(postToEdit._id);
   let editValues = {};
+  const {
+    title,
+    briefText,
+    text,
+    slug,
+    readingTime,
+    category,
+    coverImage,
+    coverImageUrl: prevPostCoverImageUrl,
+  } = postToEdit;
   if (isEditSession) {
-    const { title, briefText, text, slug, readingTime, category } = postToEdit;
     editValues = {
       title,
       briefText,
       text,
       slug,
       readingTime,
-      category: category._id,
+      category: category?._id,
+      coverImage,
     };
   }
 
@@ -31,8 +70,30 @@ function CreatePostForm({ postToEdit, categories }) {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: editValues });
+    control,
+    setValue,
+    reset,
+  } = useForm({
+    defaultValues: editValues,
+    resolver: yupResolver(schema),
+    mode: "onTouched",
+  });
+  const [coverImageUrl, setCoverImageUrl] = useState(
+    prevPostCoverImageUrl || null
+  );
+  const router = useRouter();
   const { isEditing, editPost } = useEditPost();
+  const { isCreating, createPost } = useCreatePost();
+
+  useEffect(() => {
+    if (prevPostCoverImageUrl) {
+      async function fetchMyAPI() {
+        const file = await imageUrlToFile(prevPostCoverImageUrl);
+        setValue("coverImage", file);
+      }
+      fetchMyAPI();
+    }
+  }, []);
 
   const onSubmit = async (formValues) => {
     const formData = new FormData();
@@ -41,14 +102,23 @@ function CreatePostForm({ postToEdit, categories }) {
       formData.append(key, formValues[key]);
     }
 
-    editPost(
-      { id: postToEdit._id, data: formData },
-      {
+    if (isEditSession) {
+      editPost(
+        { id: postToEdit._id, data: formData },
+        {
+          onSuccess: () => {
+            router.push("/profile/posts");
+          },
+        }
+      );
+    } else {
+      createPost(formData, {
         onSuccess: () => {
-          revalidatePath(`/profile/posts/${postToEdit._id}/edit`, "page");
+          router.push("/profile/posts");
+          reset();
         },
-      }
-    );
+      });
+    }
   };
 
   return (
@@ -95,13 +165,17 @@ function CreatePostForm({ postToEdit, categories }) {
         register={register}
         options={categories}
       />
-      {/* <Controller
+      <Controller
         control={control}
         name="coverImage"
         rules={{ required: "عکس کاور پست الزامی است" }}
         render={({ field: { value, onChange, ...field } }) => {
           return (
             <TextField
+              name="coverImage"
+              register={register}
+              isRequired
+              errors={errors}
               {...field}
               value={value?.fileName}
               onChange={(event) => {
@@ -115,28 +189,35 @@ function CreatePostForm({ postToEdit, categories }) {
             />
           );
         }}
-      /> */}
+      />
 
-      {/* {coverImageUrl && (
-        <div className="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
+      {coverImageUrl && (
+        <div className="relative aspect-video overflow-hidden rounded-lg">
           <Image
             className="object-cover object-center"
-            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt="cover-image"
             src={coverImageUrl}
+            fill
           />
           <ButtonIcon
             type="button"
             variant="red"
             className="w-6 h-6 absolute !left-0"
+            onClick={() => {
+              setCoverImageUrl(null);
+              setValue("coverImage", null);
+              const fileInput = document.getElementById("coverImage");
+              if (fileInput) fileInput.value = "";
+            }}
           >
             <XMarkIcon />
           </ButtonIcon>
         </div>
-      )} */}
+      )}
 
       <div>
-        {isEditing ? (
+        {isEditing || isCreating ? (
           <Loading />
         ) : (
           <Button variant="primary" type="submit" className="w-full">

@@ -2,8 +2,8 @@ import { getBlogs } from "@/services/blogsService";
 import Table from "@/ui/Table";
 import PostsRow from "./PostsRow";
 
-async function LatestPosts({ query }) {
-  const { posts } = await getBlogs(query);
+async function LatestPosts({ query, options = {} }) {
+  const { posts } = await getBlogs(options, query);
   return (
     <div>
       <Table>

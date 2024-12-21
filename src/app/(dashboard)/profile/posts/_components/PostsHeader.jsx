@@ -2,7 +2,10 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import FilterDropDown from "@/ui/FilterDropDown";
 
-const options = [{ value: "earliest", label: "قدیمی ترین" }];
+const options = [
+  { value: "latest", label: "جدید ترین" },
+  { value: "earliest", label: "قدیمی ترین" },
+];
 
 function PostsHeader() {
   return (

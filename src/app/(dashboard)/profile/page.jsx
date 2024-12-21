@@ -1,4 +1,5 @@
 import {
+  ArrowLeftIcon,
   ChatBubbleBottomCenterIcon,
   DocumentTextIcon,
   UsersIcon,
@@ -9,9 +10,16 @@ import { getAllCommentsApi, getBlogs } from "@/services/blogsService";
 import { cookies } from "next/headers";
 import setCookieOnReq from "@/utils/setCookieOnReq";
 import { getAllUsersApi } from "@/services/authService";
+import queryString from "query-string";
+import ButtonIcon from "@/ui/ButtonIcon";
+import Link from "next/link";
 
 async function Profile({ searchParams }) {
-  const search = await searchParams;
+  const query = await searchParams;
+  const stringified = queryString.stringify(query);
+  const cookieStore = await cookies();
+  const options = setCookieOnReq(cookieStore);
+  const { posts } = await getBlogs(options, stringified);
   return (
     <div>
       <div>
@@ -22,7 +30,15 @@ async function Profile({ searchParams }) {
       </div>
       <div className="mt-8">
         <h4 className="font-bold text-lg">اخرین پست ها</h4>
-        <LatestPosts query={search} />
+        <LatestPosts posts={posts} />
+        <div className="flex justify-center mt-5">
+          <Link href="/profile/posts">
+            <ButtonIcon variant="primary">
+              رفتن به صفحه پست ها
+              <ArrowLeftIcon />
+            </ButtonIcon>
+          </Link>
+        </div>
       </div>
     </div>
   );

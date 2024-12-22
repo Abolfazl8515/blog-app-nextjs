@@ -22,7 +22,7 @@ function CommentsRow({ comments }) {
       <td>
         <div className="flex gap-x-3">
           <UpdateBtn comment={comment} />
-          <DeleteBtn />
+          <DeleteBtn comment={comment} />
         </div>
       </td>
     </Table.Row>

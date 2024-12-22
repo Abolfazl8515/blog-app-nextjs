@@ -52,6 +52,12 @@ export const updateCommentApi = async ({ id, status }, options) => {
     .then(({ data }) => data.data);
 };
 
+export const deleteCommentApi = async (id, options) => {
+  return http
+    .delete(`/comment/remove/${id}`, options)
+    .then(({ data }) => data.data);
+};
+
 export async function getAllCommentsApi(options = {}) {
   return http.get(`/comment/list`, options).then(({ data }) => data.data);
 }

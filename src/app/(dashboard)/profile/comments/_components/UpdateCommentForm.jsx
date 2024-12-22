@@ -45,9 +45,6 @@ function UpdateCommentForm({ comment, onClose }) {
     <form
       className="form"
       action={async (formData) => {
-        console.log(formData.get("status"));
-        console.log(comment._id);
-
         await formAction({ formData, commentId: comment._id });
       }}
     >

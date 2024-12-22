@@ -1,13 +1,13 @@
 "use server";
-import { DeleteBlogApi } from "@/services/blogsService";
+import { deleteCommentApi } from "@/services/blogsService";
 import setCookieOnReq from "@/utils/setCookieOnReq";
 import { cookies } from "next/headers";
 
-export default async function deletePost(prevState, { postId }) {
+export default async function deleteComment(prevState, { commentId }) {
   const cookieStore = await cookies();
   const options = setCookieOnReq(cookieStore);
   try {
-    const { message } = await DeleteBlogApi(postId, options);
+    const { message } = await deleteCommentApi(commentId, options);
     return {
       error: "",
       message,

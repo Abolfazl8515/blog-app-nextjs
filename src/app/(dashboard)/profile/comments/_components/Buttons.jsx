@@ -2,8 +2,12 @@
 import ButtonIcon from "@/ui/ButtonIcon";
 import Modal from "@/ui/Modal";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import UpdateCommentForm from "./UpdateCommentForm";
+import ConfirmDelete from "@/ui/ConfirmDelete";
+import deleteComment from "../_actions/deleteComment";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function UpdateBtn({ comment }) {
   const commentId = comment._id;
@@ -25,10 +29,46 @@ export function UpdateBtn({ comment }) {
   );
 }
 
-export function DeleteBtn() {
+export function DeleteBtn({ comment }) {
+  const [open, setOpen] = useState(false);
+  const [state, formAction] = useActionState(deleteComment, {
+    message: "",
+    error: "",
+  });
+  const router = useRouter();
+
+  const confirmHandler = (formData) => {
+    formAction({ formData, commentId: comment._id });
+  };
+
+  useEffect(() => {
+    if (state?.message) {
+      toast.success(state.message);
+      router.refresh();
+      setOpen(false);
+    }
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
   return (
-    <ButtonIcon variant="outline">
-      <TrashIcon />
-    </ButtonIcon>
+    <>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="حذف نظر"
+        description={`حذف نظر ${comment.user.name}`}
+      >
+        <ConfirmDelete
+          onClose={() => setOpen(false)}
+          onConfirm={confirmHandler}
+          resourceName={` نظر ${comment.user.name}`}
+        />
+      </Modal>
+      <ButtonIcon variant="outline" onClick={() => setOpen(true)}>
+        <TrashIcon />
+      </ButtonIcon>
+    </>
   );
 }

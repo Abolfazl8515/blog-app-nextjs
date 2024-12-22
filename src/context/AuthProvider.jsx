@@ -1,5 +1,10 @@
 "use client";
-import { getUserApi, signinApi, signupApi } from "@/services/authService";
+import {
+  getUserApi,
+  logoutApi,
+  signinApi,
+  signupApi,
+} from "@/services/authService";
 import { useRouter } from "next/navigation";
 import { createContext, use, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
@@ -9,6 +14,7 @@ const SIGNUP = "signup";
 const REJECTED = "rejected";
 const LOADING = "loading";
 const USER_LOADED = "user/loaded";
+const LOGOUT = "logout";
 
 const AuthContext = createContext();
 
@@ -51,6 +57,18 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload,
         isAuthenticated: true,
+        isLoading: false,
+      };
+    case USER_LOADED:
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+      };
+    case LOGOUT:
+      return {
+        ...initialState,
         isLoading: false,
       };
 
@@ -103,7 +121,18 @@ export default function AuthProvider({ children }) {
       toast.error(errorMsg);
     }
   };
-  const logout = () => {};
+  const logout = async () => {
+    try {
+      await logoutApi();
+      dispatch({ type: LOGOUT });
+      router.replace("/");
+      toast("شما از حساب خود خارج شدید", {
+        icon: "ℹ️",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {

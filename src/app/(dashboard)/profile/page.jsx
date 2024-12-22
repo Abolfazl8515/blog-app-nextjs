@@ -13,6 +13,8 @@ import { getAllUsersApi } from "@/services/authService";
 import queryString from "query-string";
 import ButtonIcon from "@/ui/ButtonIcon";
 import Link from "next/link";
+import { Suspense } from "react";
+import Fallback from "@/ui/FallBack";
 
 async function Profile({ searchParams }) {
   const query = await searchParams;
@@ -30,7 +32,9 @@ async function Profile({ searchParams }) {
       </div>
       <div className="mt-8">
         <h4 className="font-bold text-lg">اخرین پست ها</h4>
-        <LatestPosts posts={posts} />
+        <Suspense fallback={<Fallback />}>
+          <LatestPosts posts={posts} />
+        </Suspense>
         <div className="flex justify-center mt-5">
           <Link href="/profile/posts">
             <ButtonIcon variant="primary">
@@ -74,5 +78,9 @@ async function GenerateDashboardList() {
     },
   ];
 
-  return dashboardList.map((item) => <Card item={item} key={item.id} />);
+  return dashboardList.map((item) => (
+    <Suspense fallback={<Fallback />}>
+      <Card item={item} key={item.id} />
+    </Suspense>
+  ));
 }

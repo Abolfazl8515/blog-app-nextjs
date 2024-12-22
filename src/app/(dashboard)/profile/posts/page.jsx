@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 import setCookieOnReq from "@/utils/setCookieOnReq";
 import Pagination from "@/ui/Pagination";
 import { getBlogs } from "@/services/blogsService";
+import { Suspense } from "react";
+import Fallback from "@/ui/FallBack";
 
 async function Posts({ searchParams }) {
   const query = await searchParams;
@@ -15,7 +17,9 @@ async function Posts({ searchParams }) {
   return (
     <div>
       <PostsHeader />
-      <LatestPosts posts={posts} />
+      <Suspense fallback={<Fallback />}>
+        <LatestPosts posts={posts} />
+      </Suspense>
       {totalPages >= 2 && <Pagination totalPages={totalPages} />}
     </div>
   );

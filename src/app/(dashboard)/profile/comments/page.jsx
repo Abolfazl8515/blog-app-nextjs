@@ -3,7 +3,7 @@ import LatestComments from "./_components/LatestComments";
 import { Suspense } from "react";
 import Fallback from "@/ui/FallBack";
 
-async function Posts() {
+async function Comments() {
   const { comments } = await getAllCommentsApi();
   return (
     <div>
@@ -17,4 +17,4 @@ async function Posts() {
   );
 }
 
-export default Posts;
+export default Comments;

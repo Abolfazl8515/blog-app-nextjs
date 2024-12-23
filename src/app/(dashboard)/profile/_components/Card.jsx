@@ -2,7 +2,7 @@ import { toPersianDigits } from "@/utils/numberFormatter";
 
 function Card({ item }) {
   return (
-    <div className="w-1/3 h-28 flex flex-col gap-y-2 p-2 bg-secondary-200 rounded-md">
+    <div className="lg:w-1/3 w-11/12 h-28 flex flex-col gap-y-2 p-2 bg-secondary-200 rounded-md">
       <h5 className="w-full font-bold text-secondary-700 text-base flex items-center gap-x-2">
         {item.icon}
         <span>{item.title}</span>

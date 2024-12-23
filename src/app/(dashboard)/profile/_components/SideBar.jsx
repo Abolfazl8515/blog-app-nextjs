@@ -11,7 +11,7 @@ function SideBar() {
   const { logout } = useAuth();
 
   return (
-    <div className="overflow-y-auto flex flex-col p-5 h-screen pt-10 lg:pt-8">
+    <div className="lg:overflow-y-auto overflow-hidden flex flex-col p-5 h-screen pt-10 lg:pt-8">
       <Link
         href="/"
         className="flex items-center gap-x-4 justify-center text-secondary-700 border-b  border-b-secondary-200 

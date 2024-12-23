@@ -9,9 +9,9 @@ const options = [
 
 function PostsHeader() {
   return (
-    <div className="flex items-center justify-between mb-8">
-      <div className="w-1/2 flex gap-x-3 items-center">
-        <h1 className="font-black text-secondary-700 text-xl">پست های شما</h1>
+    <div className="flex items-center lg:justify-between mb-8 lg:flex-row gap-y-3 flex-col">
+      <div className="lg:w-1/2 w-full flex gap-x-3 items-center justify-around">
+        <h1 className="font-black text-secondary-700 text-xl">لیست پست ها</h1>
         <Link
           href="/profile/posts/create"
           className="btn btn--primary flex items-center gap-x-2  px-3"
@@ -20,7 +20,7 @@ function PostsHeader() {
           <span>اضافه کردن پست</span>
         </Link>
       </div>
-      <div className="w-1/3">
+      <div className="lg:w-1/3 w-full">
         <FilterDropDown options={options} filterField="sort" />
       </div>
     </div>

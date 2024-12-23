@@ -1,6 +1,10 @@
 "use client";
 import { useAuth } from "@/context/AuthProvider";
 import NavLink from "./NavLink";
+import useDevice from "@/hooks/useDevice";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import MobileSideBar from "@/ui/MobileSideBar";
+import { useState } from "react";
 
 const navLinks = [
   {
@@ -17,6 +21,8 @@ const navLinks = [
 
 function Header() {
   const { user, isLoading } = useAuth();
+  const { isMobileDevice } = useDevice("(max-width: 1024px)");
+  const [open, setOpen] = useState(false);
 
   return (
     <header
@@ -27,7 +33,7 @@ function Header() {
     >
       <nav className="container xl:max-w-screen-lg">
         <ul className="flex items-center text-secondary-400 justify-between py-2">
-          <div className="flex items-center gap-x-10">
+          <div className="lg:flex items-center gap-x-10 hidden">
             {navLinks.map((navLink) => {
               return (
                 <li key={navLink.id}>
@@ -36,6 +42,28 @@ function Header() {
               );
             })}
           </div>
+          {isMobileDevice && (
+            <MobileSideBar open={open} setOpen={setOpen}>
+              <ul>
+                {navLinks.map((navLink) => {
+                  return (
+                    <li key={navLink.id} className="text-xl my-5 px-4">
+                      <NavLink
+                        path={navLink.path}
+                        active="bg-primary-100 text-secondary-700 rounded-lg"
+                      >
+                        {navLink.children}
+                      </NavLink>
+                    </li>
+                  );
+                })}
+              </ul>
+            </MobileSideBar>
+          )}
+          <Bars3Icon
+            onClick={() => setOpen(true)}
+            className="w-7 h-7 text-secondary-700 flex lg:hidden cursor-pointer"
+          />
           <li>
             {user ? (
               <NavLink path="/profile">پروفایل</NavLink>

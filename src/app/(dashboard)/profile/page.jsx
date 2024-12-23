@@ -26,7 +26,7 @@ async function Profile({ searchParams }) {
     <div>
       <div>
         <h4 className="font-bold text-lg">داشبورد</h4>
-        <div className="w-full flex gap-x-4 justify-center items-center mt-5">
+        <div className="w-full flex lg:flex-row flex-col gap-y-4 lg:gap-x-4 justify-center items-center mt-5">
           <GenerateDashboardList />
         </div>
       </div>

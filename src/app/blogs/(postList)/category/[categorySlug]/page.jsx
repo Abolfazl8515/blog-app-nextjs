@@ -15,38 +15,6 @@ async function Category({ params, searchParams }) {
   const options = setCookieOnReq(cookieStore);
   const { posts } = await getBlogs(options, queries);
 
-  const generatePersianCategory = () => {
-    let categoryText = "";
-    switch (categorySlug) {
-      case "sport":
-        categoryText = "ورزشی";
-        break;
-      case "cultural":
-        categoryText = "فرهنگی";
-        break;
-      case "economic":
-        categoryText = "اقتصادی";
-        break;
-      case "programming":
-        categoryText = "برنامه نویسی";
-        break;
-      case "political":
-        categoryText = "سیاسی";
-        break;
-      case "historical":
-        categoryText = "تاریخی";
-        break;
-      case "geographic":
-        categoryText = "جغرافیا";
-        break;
-
-      default:
-        categoryText = "unknown category!";
-        break;
-    }
-    return categoryText;
-  };
-
   return (
     <div>
       {posts.length > 0 ? (
@@ -55,10 +23,6 @@ async function Category({ params, searchParams }) {
             <p className="mb-4 text-secondary-700">
               نشان دادن {posts.length} نتیجه برای
               <span className="font-bold">&quot;{search.search}&quot;</span>
-              <span className="font-bold">در دسته بندی</span>
-              <span className="font-bold">
-                &quot;{generatePersianCategory()}&quot;
-              </span>
             </p>
             <PostList posts={posts} />
           </>

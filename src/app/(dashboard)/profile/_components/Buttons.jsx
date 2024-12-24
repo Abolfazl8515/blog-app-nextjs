@@ -42,7 +42,7 @@ export function DeleteButton({ id: postId, postTitle }) {
     } else if (state?.error) {
       toast.error(state.error);
     }
-  }, [state]);
+  }, [state,router]);
 
   return (
     <>

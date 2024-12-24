@@ -25,7 +25,7 @@ function CommentForm({ postId, parentId, onClose }) {
     } else if (state?.error) {
       toast.error(state.error);
     }
-  }, [state]);
+  }, [state,onClose]);
 
   return (
     <div>

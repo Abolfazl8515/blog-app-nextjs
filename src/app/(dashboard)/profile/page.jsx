@@ -79,8 +79,8 @@ async function GenerateDashboardList() {
   ];
 
   return dashboardList.map((item) => (
-    <Suspense fallback={<Fallback />}>
-      <Card item={item} key={item.id} />
+    <Suspense key={item.id} fallback={<Fallback />}>
+      <Card item={item} />
     </Suspense>
   ));
 }

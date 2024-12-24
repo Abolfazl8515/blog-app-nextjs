@@ -39,7 +39,7 @@ function UpdateCommentForm({ comment, onClose }) {
     if (state?.error) {
       toast.error(state.error);
     }
-  }, [state]);
+  }, [state,onClose]);
 
   return (
     <form

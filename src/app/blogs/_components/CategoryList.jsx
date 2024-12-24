@@ -1,5 +1,6 @@
 import { getCategories } from "@/services/categoryService";
 import Link from "next/link";
+import { memo } from "react";
 
 async function CategoryList() {
   const { categories } = await getCategories();
@@ -21,4 +22,4 @@ async function CategoryList() {
   );
 }
 
-export default CategoryList;
+export default memo(CategoryList);

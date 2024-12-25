@@ -26,7 +26,7 @@ function Header() {
 
   return (
     <header
-      className={`z-10 shadow-md bg-inherit mb-10 sticky top-0
+      className={`z-10 shadow-md bg-secondary-0 backdrop-blur-3xl bg-opacity-25 mb-10 sticky top-0
          transition-all duration-200 border-b border-b-secondary-300 
         ${isLoading ? "blur-sm opacity-70" : "opacity-100 blur-0"}
       `}
@@ -36,7 +36,7 @@ function Header() {
           <div className="lg:flex items-center gap-x-10 hidden">
             {navLinks.map((navLink) => {
               return (
-                <li key={navLink.id}>
+                <li key={navLink.id} className="text-xl">
                   <NavLink path={navLink.path}>{navLink.children}</NavLink>
                 </li>
               );
@@ -64,7 +64,7 @@ function Header() {
             onClick={() => setOpen(true)}
             className="w-7 h-7 text-secondary-700 flex lg:hidden cursor-pointer"
           />
-          <li>
+          <li className="text-xl">
             {user ? (
               <NavLink path="/profile">پروفایل</NavLink>
             ) : (

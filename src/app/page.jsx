@@ -6,7 +6,14 @@ import { Suspense } from "react";
 import {
   BookmarkIcon,
   ChatBubbleBottomCenterIcon,
+  CommandLineIcon,
+  CurrencyDollarIcon,
+  GlobeAltIcon,
+  GlobeAsiaAustraliaIcon,
   HeartIcon,
+  UserGroupIcon,
+  UserIcon,
+  BookOpenIcon,
 } from "@heroicons/react/24/outline";
 import "aos/dist/aos.css";
 import Aos from "aos";
@@ -17,6 +24,44 @@ Aos.init({
   animatedClassName: "aos-animate",
   once: true,
 });
+
+const favCategoryInfo = [
+  {
+    id: 0,
+    title: "ورزشی",
+    icon: <GlobeAsiaAustraliaIcon className="w-10 h-10 text-primary-700" />,
+  },
+  {
+    id: 1,
+    title: "فرهنگی",
+    icon: <UserIcon className="w-10 h-10 text-primary-700" />,
+  },
+  {
+    id: 2,
+    title: "اقتصادی",
+    icon: <CurrencyDollarIcon className="w-10 h-10 text-primary-700" />,
+  },
+  {
+    id: 3,
+    title: "برنامه نویسی",
+    icon: <CommandLineIcon className="w-10 h-10 text-primary-700" />,
+  },
+  {
+    id: 4,
+    title: "سیاسی",
+    icon: <UserGroupIcon className="w-10 h-10 text-primary-700" />,
+  },
+  {
+    id: 5,
+    title: "تاریخی",
+    icon: <BookOpenIcon className="w-10 h-10 text-primary-700" />,
+  },
+  {
+    id: 6,
+    title: "جغرافیا",
+    icon: <GlobeAltIcon className="w-10 h-10 text-primary-700" />,
+  },
+];
 
 export default function Home() {
   return (
@@ -36,6 +81,24 @@ export default function Home() {
             <Suspense>
               <Search path="/blogs" />
             </Suspense>
+          </div>
+        </section>
+        <section>
+          <h3
+            data-aos="fade-right"
+            data-aos-duration="500"
+            className="w-48 mx-auto text-white rounded-lg text-center text-xl p-3 mb-10 bg-primary-700"
+          >
+            موضوعات محبوب
+          </h3>
+          <div className="lg:w-1/2 w-3/4 mx-auto flex gap-5 flex-wrap justify-center">
+            {favCategoryInfo.map((category) => (
+              <ShowFavCategoryCard
+                key={category.id}
+                title={category.title}
+                icon={category.icon}
+              />
+            ))}
           </div>
         </section>
         <section className="md:w-3/4 w-full mx-auto flex md:flex-row flex-col">
@@ -104,6 +167,17 @@ function ShowAdvantagesSection({ title, description, icon }) {
       </div>
       <p className="text-secondary-500 font-bold text-lg">{title}</p>
       <p>{description}</p>
+    </div>
+  );
+}
+
+function ShowFavCategoryCard({ icon, title }) {
+  return (
+    <div data-aos="zoom-in" data-aos-duration="500">
+      <div className="w-24 h-24 flex flex-col justify-center items-center p-3 bg-secondary-0 shadow-lg shadow-secondary-300 rounded-lg hover:scale-125 transition-all duration-200">
+        {icon}
+        <p className="text-secondary-500 text-sm">{title}</p>
+      </div>
     </div>
   );
 }

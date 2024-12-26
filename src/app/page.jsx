@@ -17,6 +17,7 @@ import {
 } from "@heroicons/react/24/outline";
 import "aos/dist/aos.css";
 import Aos from "aos";
+import Footer from "@/components/Footer";
 
 Aos.init({
   startEvent: "DOMContentLoaded",
@@ -151,6 +152,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import NavLink from "@/components/NavLink";
 
@@ -24,6 +25,7 @@ function AuthLayout({ children }) {
           {children}
         </div>
       </div>
+      <Footer />
     </>
   );
 }

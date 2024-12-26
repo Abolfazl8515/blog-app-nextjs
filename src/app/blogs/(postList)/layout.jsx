@@ -16,7 +16,7 @@ function Layout({ children }) {
       </div>
       <div className="grid grid-cols-12 gap-8 mt-10">
         <div className="col-span-12 lg:col-span-4 xl:col-span-3">
-          <div className="fixed top-40 lg:block hidden">
+          <div className="lg:block hidden">
             <CategoryList />
           </div>
         </div>

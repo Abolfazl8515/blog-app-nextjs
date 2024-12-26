@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 export default function RootLayout({ children }) {
@@ -5,6 +6,7 @@ export default function RootLayout({ children }) {
     <>
       <Header />
       <div className="container xl:max-w-screen-xl">{children}</div>
+      <Footer />
     </>
   );
 }

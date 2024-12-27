@@ -5,6 +5,7 @@ import useDevice from "@/hooks/useDevice";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import MobileSideBar from "@/ui/MobileSideBar";
 import { useState } from "react";
+import ToggleDarkMode from "@/ui/ToggleDarkMode";
 
 const navLinks = [
   {
@@ -60,17 +61,22 @@ function Header() {
               </ul>
             </MobileSideBar>
           )}
-          <Bars3Icon
-            onClick={() => setOpen(true)}
-            className="w-7 h-7 text-secondary-700 flex lg:hidden cursor-pointer"
-          />
-          <li className="text-xl">
-            {user ? (
-              <NavLink path="/profile">پروفایل</NavLink>
-            ) : (
-              <NavLink path="/signin">ورود</NavLink>
-            )}
+          <li>
+            <Bars3Icon
+              onClick={() => setOpen(true)}
+              className="w-7 h-7 text-secondary-700 flex lg:hidden cursor-pointer"
+            />
           </li>
+          <div className="flex gap-x-5 items-center">
+            <li className="text-xl">
+              {user ? (
+                <NavLink path="/profile">پروفایل</NavLink>
+              ) : (
+                <NavLink path="/signin">ورود</NavLink>
+              )}
+            </li>
+            <ToggleDarkMode />
+          </div>
         </ul>
       </nav>
     </header>

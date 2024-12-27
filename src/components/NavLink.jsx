@@ -8,7 +8,7 @@ function NavLink({ path, children, active = "text-primary-900" }) {
 
   return (
     <Link
-      className={`block p-2 transition-all ease-out
+      className={`block p-2 transition-all ease-out text-secondary-500
         ${pathname === path && active}
       `}
       href={path}

@@ -168,7 +168,7 @@ function ShowAdvantagesSection({ title, description, icon }) {
         {icon}
       </div>
       <p className="text-secondary-500 font-bold text-lg">{title}</p>
-      <p>{description}</p>
+      <p className="text-secondary-500">{description}</p>
     </div>
   );
 }
@@ -176,7 +176,7 @@ function ShowAdvantagesSection({ title, description, icon }) {
 function ShowFavCategoryCard({ icon, title }) {
   return (
     <div data-aos="zoom-in" data-aos-duration="500">
-      <div className="w-24 h-24 flex flex-col justify-center items-center p-3 bg-secondary-0 shadow-lg shadow-secondary-300 rounded-lg hover:scale-125 transition-all duration-200">
+      <div className="w-24 h-24 flex flex-col justify-center items-center p-3 bg-secondary-0 shadow-lg shadow-secondary-100 rounded-lg hover:scale-125 transition-all duration-200">
         {icon}
         <p className="text-secondary-500 text-sm">{title}</p>
       </div>

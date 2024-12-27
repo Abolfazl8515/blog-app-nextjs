@@ -25,13 +25,13 @@ async function Profile({ searchParams }) {
   return (
     <div>
       <div>
-        <h4 className="font-bold text-lg">داشبورد</h4>
+        <h4 className="font-bold text-lg text-secondary-500">داشبورد</h4>
         <div className="w-full flex lg:flex-row flex-col gap-y-4 lg:gap-x-4 justify-center items-center mt-5">
           <GenerateDashboardList />
         </div>
       </div>
       <div className="mt-8">
-        <h4 className="font-bold text-lg">اخرین پست ها</h4>
+        <h4 className="font-bold text-lg text-secondary-500">اخرین پست ها</h4>
         <Suspense fallback={<Fallback />}>
           <LatestPosts posts={posts} />
         </Suspense>

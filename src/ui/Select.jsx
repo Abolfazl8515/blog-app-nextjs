@@ -7,7 +7,7 @@ function Select({ label, name, register, options, required }) {
       <select {...register(name)} id={name} className="textField__input">
         {options.map((option) => (
           <option
-            className="bg-primary-100"
+            className="bg-primary-100 text-slate-500"
             key={option._id}
             value={option._id}
           >

@@ -31,7 +31,7 @@ function SignIn() {
 
   return (
     <div>
-      <form action={handleSubmit(submitHandler)} className="space-y-10">
+      <form onSubmit={handleSubmit(submitHandler)} className="space-y-10">
         <TextField
           isRequired
           name="email"

@@ -7,10 +7,16 @@ const DarkModeContext = createContext();
 export const DarkModeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     "isDarkMoode",
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+    false
   );
 
   const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
+
+  useEffect(() => {
+    if (!window === undefined) {
+      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {

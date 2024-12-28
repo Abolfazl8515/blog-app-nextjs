@@ -2,7 +2,7 @@
 import Header from "@/components/Header";
 import Search from "@/ui/Search";
 import LatestPostsHome from "@/components/LatestPostsHome";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import {
   BookmarkIcon,
   ChatBubbleBottomCenterIcon,
@@ -18,13 +18,6 @@ import {
 import "aos/dist/aos.css";
 import Aos from "aos";
 import Footer from "@/components/Footer";
-
-Aos.init({
-  startEvent: "DOMContentLoaded",
-  initClassName: "aos-init",
-  animatedClassName: "aos-animate",
-  once: true,
-});
 
 const favCategoryInfo = [
   {
@@ -65,6 +58,16 @@ const favCategoryInfo = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    Aos.init({
+      startEvent: "DOMContentLoaded",
+      initClassName: "aos-init",
+      animatedClassName: "aos-animate",
+      once: true,
+    });
+  }, []);
+
   return (
     <>
       <Header />

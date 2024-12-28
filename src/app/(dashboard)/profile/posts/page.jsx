@@ -14,6 +14,16 @@ async function Posts({ searchParams }) {
   const cookieStore = await cookies();
   const options = setCookieOnReq(cookieStore);
   const { posts, totalPages } = await getBlogs(options, stringified);
+
+  if (posts.length === 0) {
+    return (
+      <>
+        <PostsHeader />
+        <p className="text-secondary-500">پستی وجود ندارد</p>
+      </>
+    );
+  }
+
   return (
     <div>
       <PostsHeader />

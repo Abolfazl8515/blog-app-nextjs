@@ -6,6 +6,16 @@ import CategoriesHeader from "./_components/CategoriesHeader";
 
 async function Categories() {
   const { categories } = await getCategories();
+
+  if (categories.length === 0) {
+    return (
+      <>
+        <CategoriesHeader />
+        <p className="text-secondary-500">دسته بندی ایی وجود ندارد</p>
+      </>
+    );
+  }
+
   return (
     <div>
       <CategoriesHeader />

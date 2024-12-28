@@ -32,9 +32,13 @@ async function Profile({ searchParams }) {
       </div>
       <div className="mt-8">
         <h4 className="font-bold text-lg text-secondary-500">اخرین پست ها</h4>
-        <Suspense fallback={<Fallback />}>
-          <LatestPosts posts={posts} />
-        </Suspense>
+        {posts.length > 0 ? (
+          <Suspense fallback={<Fallback />}>
+            <LatestPosts posts={posts} />
+          </Suspense>
+        ) : (
+          <p className="text-secondary-500">پستی وجود ندارد</p>
+        )}
         <div className="flex justify-center mt-5">
           <Link href="/profile/posts">
             <ButtonIcon variant="primary">

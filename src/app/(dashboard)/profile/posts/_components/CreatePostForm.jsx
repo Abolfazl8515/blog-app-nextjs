@@ -15,6 +15,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { imageUrlToFile } from "@/utils/fileFormatter";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const schema = yup
   .object({
@@ -180,12 +181,26 @@ function CreatePostForm({ postToEdit = {}, categories }) {
               value={value?.fileName}
               onChange={(event) => {
                 const file = event.target.files[0];
+                if (!file.type.startsWith("image/")) {
+                  event.target.value = "";
+                  toast.error("لطفا یک عکس اپلود کنید");
+                  return;
+                }
+                const fileSize = file.size / (1024 * 1024);
+                if (fileSize > 10) {
+                  event.target.value = "";
+                  toast.error(
+                    "لطفا فایلی با حجم کمتر از 10 مگابایت اپلود کنید"
+                  );
+                  return;
+                }
                 onChange(file);
                 setCoverImageUrl(URL.createObjectURL(file));
               }}
               label="کاور پست"
               type="file"
               id="coverImage"
+              accept="image/*"
             />
           );
         }}

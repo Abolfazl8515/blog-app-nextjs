@@ -8,6 +8,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
 import SideBar from "./SideBar";
+import ToggleDarkMode from "@/ui/ToggleDarkMode";
 
 function ProfileHeader() {
   const { user, isLoading } = useAuth();
@@ -36,6 +37,7 @@ function ProfileHeader() {
           </div>
         </div>
         <div className="flex items-center gap-x-3">
+          <ToggleDarkMode />
           <Link href="/profile">
             <ButtonIcon
               color="outline"

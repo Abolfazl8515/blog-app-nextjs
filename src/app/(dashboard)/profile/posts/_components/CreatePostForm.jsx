@@ -97,15 +97,9 @@ function CreatePostForm({ postToEdit = {}, categories }) {
   }, []);
 
   const onSubmit = async (formValues) => {
-    const formData = new FormData();
-
-    for (const key in formValues) {
-      formData.append(key, formValues[key]);
-    }
-
     if (isEditSession) {
       editPost(
-        { id: postToEdit._id, data: formData },
+        { id: postToEdit._id, data: formValues },
         {
           onSuccess: () => {
             router.push("/profile/posts");
@@ -113,7 +107,7 @@ function CreatePostForm({ postToEdit = {}, categories }) {
         }
       );
     } else {
-      createPost(formData, {
+      createPost(formValues, {
         onSuccess: () => {
           router.push("/profile/posts");
           reset();

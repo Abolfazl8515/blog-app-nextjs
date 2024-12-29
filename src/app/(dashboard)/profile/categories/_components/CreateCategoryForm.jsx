@@ -52,18 +52,13 @@ function CreateCategoryForm({ categoryToEdit = {} }) {
   const { isEditing, editCategory } = useEditCategory();
 
   const onSubmit = (formValues) => {
-    const formData = new FormData();
-
-    for (const key in formValues) {
-      formData.append(key, formValues[key]);
-    }
     if (isEditSession) {
       editCategory(
-        { id: categoryToEdit._id, data: formData },
+        { id: categoryToEdit._id, data: formValues },
         { onSuccess: () => router.push("/profile/categories") }
       );
     } else {
-      createCategory(formData, {
+      createCategory(formValues, {
         onSuccess: () => router.push("/profile/categories"),
       });
     }

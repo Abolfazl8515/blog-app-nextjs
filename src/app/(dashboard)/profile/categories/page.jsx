@@ -4,6 +4,8 @@ import LatestCategories from "./_components/LatestCategories";
 import { getCategories } from "@/services/categoryService";
 import CategoriesHeader from "./_components/CategoriesHeader";
 
+export const dynamic = "force-dynamic";
+
 async function Categories() {
   const { categories } = await getCategories();
 

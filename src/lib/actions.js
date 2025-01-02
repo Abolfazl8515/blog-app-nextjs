@@ -15,7 +15,7 @@ export async function createComment(prevState, { formData, postId, parentId }) {
       text,
     };
     const { message } = await createCommentApi(commentInfo, options);
-    revalidatePath("/blogs/[postSlug]");
+    revalidatePath("/blogs/[postSlug]","page");
     return {
       message,
     };

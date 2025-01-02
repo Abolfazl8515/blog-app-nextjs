@@ -3,6 +3,8 @@ import LatestComments from "./_components/LatestComments";
 import { Suspense } from "react";
 import Fallback from "@/ui/FallBack";
 
+export const dynamic = "force-dynamic";
+
 async function Comments() {
   const { comments } = await getAllCommentsApi();
 

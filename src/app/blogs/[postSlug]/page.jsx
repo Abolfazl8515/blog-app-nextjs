@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import RelatedPost from "../_components/RelatedPost";
 import PostComment from "../_components/comment/PostComment";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const { posts } = await getBlogs();

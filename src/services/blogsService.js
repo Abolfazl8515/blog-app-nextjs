@@ -1,6 +1,6 @@
 import http from "./httpService";
 
-export const getBlogs = async (options = {}, queries) => {
+export const getBlogs = async (options = {}, queries = "") => {
   return http
     .get(`/post/list?${queries}`, options)
     .then(({ data }) => data.data);

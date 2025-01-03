@@ -1,5 +1,5 @@
 import Table from "@/ui/Table";
-import { UpdateBtn, DeleteBtn } from "./Buttons";
+import { UpdateBtn, DeleteBtn, AnswersBtn } from "./Buttons";
 
 const types = [
   { className: "badge badge--danger", label: "رد شده" },
@@ -23,6 +23,7 @@ function CommentsRow({ comments }) {
         <div className="flex gap-x-3">
           <UpdateBtn comment={comment} />
           <DeleteBtn comment={comment} />
+          {comment.openToComment && <AnswersBtn comment={comment} />}
         </div>
       </td>
     </Table.Row>

@@ -61,3 +61,7 @@ export const deleteCommentApi = async (id, options) => {
 export async function getAllCommentsApi(options = {}) {
   return http.get(`/comment/list`, options).then(({ data }) => data.data);
 }
+
+export async function getSingleCommentApi(id,options) {
+  return http.get(`/comment/${id}`,options).then(({ data }) => data.data);
+}

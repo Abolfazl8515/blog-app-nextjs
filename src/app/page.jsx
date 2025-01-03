@@ -57,6 +57,8 @@ const favCategoryInfo = [
   },
 ];
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;

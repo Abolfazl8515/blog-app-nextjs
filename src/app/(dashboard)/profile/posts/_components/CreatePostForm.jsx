@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { imageUrlToFile } from "@/utils/fileFormatter";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { revalidatePath } from "next/cache";
 
 const schema = yup
   .object({
@@ -102,9 +103,7 @@ function CreatePostForm({ postToEdit = {}, categories }) {
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    console.log(formData);
-    
-    
+
     if (isEditSession) {
       editPost(
         { id: postToEdit._id, data: formData },

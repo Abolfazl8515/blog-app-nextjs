@@ -1,8 +1,9 @@
-import { getBlogs } from "@/services/blogsService";
+"use client";
+import useGetPosts from "@/hooks/useGetPosts";
 import PostList from "app/blogs/_components/PostList";
 
-async function LatestPostsHome() {
-  const { posts } = await getBlogs();
+function LatestPostsHome() {
+  const { posts } = useGetPosts();
 
   return <PostList posts={posts} />;
 }

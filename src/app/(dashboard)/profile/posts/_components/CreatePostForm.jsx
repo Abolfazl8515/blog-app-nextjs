@@ -102,9 +102,7 @@ function CreatePostForm({ postToEdit = {}, categories }) {
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    console.log(formData);
-    
-    
+
     if (isEditSession) {
       editPost(
         { id: postToEdit._id, data: formData },

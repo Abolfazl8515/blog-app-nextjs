@@ -3,9 +3,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "blogapi.karinoproject.ir",
-        port: "",
+        protocol: "http",
+        hostname: "localhost",
+        port: "5000",
         pathname: "/uploads/**",
       },
     ],

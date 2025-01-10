@@ -91,6 +91,7 @@ export default function AuthProvider({ children }) {
       toast.success(message);
       dispatch({ type: SIGNIN, payload: user });
       router.push("/");
+      router.refresh();
     } catch (error) {
       const errorMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errorMsg });
@@ -104,6 +105,7 @@ export default function AuthProvider({ children }) {
       toast.success(message);
       dispatch({ type: SIGNUP, payload: user });
       router.push("/");
+      router.refresh();
     } catch (error) {
       const errorMsg = error?.response?.data?.message;
       dispatch({ type: REJECTED, payload: errorMsg });
@@ -126,6 +128,7 @@ export default function AuthProvider({ children }) {
       await logoutApi();
       dispatch({ type: LOGOUT });
       router.replace("/");
+      router.refresh();
       toast("شما از حساب خود خارج شدید", {
         icon: "ℹ️",
       });

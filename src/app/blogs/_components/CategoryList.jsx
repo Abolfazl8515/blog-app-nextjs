@@ -1,9 +1,10 @@
-import { getCategories } from "@/services/categoryService";
+"use client";
+import useGetCategories from "@/hooks/useGetCategories";
 import Link from "next/link";
 import { memo } from "react";
 
-async function CategoryList() {
-  const { categories } = await getCategories();
+function CategoryList() {
+  const { categories } = useGetCategories();
   return (
     <ul className="space-y-3">
       <li className="text-secondary-700">
@@ -11,7 +12,7 @@ async function CategoryList() {
           همه
         </Link>
       </li>
-      {categories.map((item) => (
+      {categories?.map((item) => (
         <li className="text-secondary-700" key={item._id}>
           <Link href={`/blogs/category/${item.slug}`} className="w-full h-full">
             {item.title}

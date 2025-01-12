@@ -14,7 +14,7 @@ function Layout({ children }) {
         <Search />
         <CategoryListMobile />
       </div>
-      <div className="grid grid-cols-12 gap-8 mt-10">
+      <div className="grid grid-cols-12 sm:gap-8 gap-4 mt-10">
         <div className="col-span-12 lg:col-span-4 xl:col-span-3">
           <div className="lg:block hidden">
             <CategoryList />

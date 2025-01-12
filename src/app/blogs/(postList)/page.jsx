@@ -12,7 +12,6 @@ async function BlogsPage({ searchParams }) {
   const { posts } = await getBlogs(options, stringified);
   return (
     <div>
-      <>
         {search.search ? (
           <p className="mb-4 text-secondary-700">
             {posts.length === 0
@@ -22,7 +21,6 @@ async function BlogsPage({ searchParams }) {
           </p>
         ) : null}
         <PostList posts={posts} />
-      </>
     </div>
   );
 }

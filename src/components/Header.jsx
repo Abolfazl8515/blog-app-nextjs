@@ -51,7 +51,7 @@ function Header() {
                     <li key={navLink.id} className="text-xl my-5 px-4">
                       <NavLink
                         path={navLink.path}
-                        active="bg-primary-100 text-secondary-700 rounded-lg"
+                        active="bg-primary-100 text-slate-800 rounded-lg"
                       >
                         {navLink.children}
                       </NavLink>

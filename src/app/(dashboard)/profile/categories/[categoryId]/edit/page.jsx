@@ -13,7 +13,7 @@ async function EditCategory({ params }) {
           { label: "دسته بندی ها", href: "/profile/categories" },
           {
             label: " ویرایش دسته بندی ",
-            href: `/profile/categories/$${categoryId}/edit`,
+            href: `/profile/categories/${categoryId}/edit`,
             active: true,
           },
         ]}

@@ -16,7 +16,7 @@ export const DarkModeProvider = ({ children }) => {
     if (!window === undefined) {
       setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
-  }, []);
+  }, [setIsDarkMode]);
 
   useEffect(() => {
     if (isDarkMode) {

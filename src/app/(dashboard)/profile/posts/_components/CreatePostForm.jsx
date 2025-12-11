@@ -94,7 +94,7 @@ function CreatePostForm({ postToEdit = {}, categories }) {
       }
       fetchMyAPI();
     }
-  }, []);
+  }, [prevPostCoverImageUrl,setValue]);
 
   const onSubmit = async (data) => {
     const formData = new FormData();
